@@ -18,6 +18,9 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    meta: {
+      robots: "noindex, nofollow",
+    },
   },
   collections: [Users, Media, Pages],
   editor: lexicalEditor(),
