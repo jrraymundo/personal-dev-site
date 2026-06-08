@@ -18,8 +18,9 @@ export const Users: CollectionConfig = {
     {
       name: "roles",
       type: "select",
+      required: true,
       hasMany: true,
-      defaultValue: "admin",
+      defaultValue: "editor",
       access: {
         create: isAdminField,
         update: isAdminField,
