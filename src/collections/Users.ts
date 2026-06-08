@@ -1,13 +1,39 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from "payload";
+import { isAdmin, isAdminField } from "@/access/isAdmin";
+import { isAdminOrSelf } from "@/access/isAdminOrSelf";
 
 export const Users: CollectionConfig = {
-  slug: 'users',
+  slug: "users",
   admin: {
-    useAsTitle: 'email',
+    useAsTitle: "email",
   },
   auth: true,
+  access: {
+    read: isAdminOrSelf,
+    create: isAdmin,
+    update: isAdminOrSelf,
+    delete: isAdmin,
+  },
   fields: [
-    // Email added by default
-    // Add more fields as needed
+    {
+      name: "roles",
+      type: "select",
+      hasMany: true,
+      defaultValue: "admin",
+      access: {
+        create: isAdminField,
+        update: isAdminField,
+      },
+      options: [
+        {
+          label: "Admin",
+          value: "admin",
+        },
+        {
+          label: "Editor",
+          value: "editor",
+        },
+      ],
+    },
   ],
-}
+};
